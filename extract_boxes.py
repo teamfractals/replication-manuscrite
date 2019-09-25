@@ -2,6 +2,7 @@ import cv2
 import numpy as np
 import os
 import sys
+from utils import get_filename_list
 
 def sort_contours2(cnts, method="left-to-right"):
 	boundingBoxes = [cv2.boundingRect(c) for c in cnts]
@@ -74,13 +75,7 @@ def extract_boxes(img_path):
     wmin = 0.06 * img_w
     wmax = 0.09 * img_w
 
-    names = []
-    for a in range(26):
-        names.append(chr(97 + a)+"_cap")
-    for a in range(26):
-        names.append(chr(97 + a)+"_small")
-    for a in range(10):
-        names.append(chr(48 + a))
+    names = get_filename_list()
 
     idx = 0
     for c in contours:
@@ -90,7 +85,8 @@ def extract_boxes(img_path):
         # If the box height is greater then 20, width is >80, then only save it as a box in "cropped/" folder.
         if (w >= wmin and w <= wmax and h >= hmin and h <= hmax):
             new_img = img[y:y+h, x:x+w]
-            cv2.imwrite("out/" + img_name + "/"+ str(names[idx]) + '.png', new_img)
+            print("WRITING: " + img_name + "/" + names[idx])
+            cv2.imwrite("out/" + img_name + "/" + names[idx], new_img)
             idx += 1
     return
 
