@@ -7,7 +7,7 @@ from utils import get_filename_list
 def sort_contours2(cnts, method="left-to-right"):
 	boundingBoxes = [cv2.boundingRect(c) for c in cnts]
 	(cnts, boundingBoxes) = zip(*sorted(zip(cnts, boundingBoxes),
-		key=lambda b: b[1][1]*10 + b[1][0], reverse=False))
+		key=lambda b: b[1][1]*15 + b[1][0], reverse=False))
  
 	# return the list of sorted contours and bounding boxes
 	return (cnts, boundingBoxes)
