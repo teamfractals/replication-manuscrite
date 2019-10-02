@@ -3,6 +3,7 @@ import numpy as np
 import os
 import sys
 from utils import get_filename_list
+from PIL import Image
 
 def color_mask(hsv_img, boundaries):
     lower, upper = boundaries
@@ -25,8 +26,8 @@ def extract_roi(box_dir):
         print("READING: " + box_dir + "/" + name)
         img = cv2.imread( box_dir + "/" + name)
         hsv = cv2.cvtColor(img, cv2.COLOR_BGR2HSV)
-        boundaries = [([0,80,80], [40, 255, 255]),
-                      ([135,80,80], [179, 255, 255])] 
+        boundaries = [([0,50,60], [40, 255, 255]),
+                      ([135,50,60], [179, 255, 255])] 
         
         mask = np.zeros((hsv.shape[0], hsv.shape[1]), dtype='uint8')
         for b in boundaries:
@@ -57,6 +58,25 @@ def extract_roi(box_dir):
         
         roi = img[ymin:ymax, xmin:xmax]
         cv2.imwrite(box_dir + "/roi/" + name, roi)
+        
+        img = Image.open(box_dir + "/roi/" + name)
+
+        ary = np.array(img)
+        
+        # Split the three channels
+        r,g,b = np.split(ary,3,axis=2)
+        r=r.reshape(-1)
+        g=r.reshape(-1)
+        b=r.reshape(-1)
+        
+        # Standard RGB to grayscale 
+        #bitmap = list(map(lambda x: 0.299*x[0]+0.587*x[1]+0.114*x[2], zip(r,g,b)))
+        bitmap = list(map(lambda x: 0.04*x[0]+0.12*x[1]+0.50*x[2], zip(r,g,b)))
+        bitmap = np.array(bitmap).reshape([ary.shape[0], ary.shape[1]])
+        bitmap = np.dot((bitmap > 128).astype(float),255)
+        im = Image.fromarray(bitmap.astype(np.uint8))
+        im.save(box_dir + "/roi/" + name)
+        
     return
 
 if __name__ == '__main__':
