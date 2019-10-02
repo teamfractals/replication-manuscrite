@@ -32,7 +32,8 @@ def generate_layout(text, in_path, out_file):
                pathjoin(in_path, 'roi/g_small.png'), 
                pathjoin(in_path, 'roi/p_small.png'),
                pathjoin(in_path, 'roi/y_small.png'),
-               pathjoin(in_path, 'roi/j_small.png'),]
+               pathjoin(in_path, 'roi/j_small.png'),
+               pathjoin(in_path, 'roi/q_small.png')]
     list_im = []
 
     ke = names.keys()    
