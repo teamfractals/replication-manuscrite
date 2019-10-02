@@ -1,2 +1,5 @@
 *__pycache__/*
 out/*
+env/*
+.idea/*
+static/generated.png

@@ -1,0 +1,15 @@
+<!doctype html>
+<html>
+<head>
+    <title>Replication Manuscrite</title>
+    <link rel="stylesheet" type="text/css" href="{{url_for('static', filename='style.css')}}">
+</head>
+<body>
+<h1> Replication Manuscrite </h1>
+<form action="/upload" method="post" enctype="multipart/form-data">
+    <label for="template_input">Upload the filled-out template:</label>
+    <input type="file" id="template_input" name="template_input" accept="image/png, image/jpeg">
+    <button>Submit</button>
+</form>
+</body>
+</html>

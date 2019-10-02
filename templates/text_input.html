@@ -1,0 +1,15 @@
+<!doctype html>
+<html>
+<head>
+    <title>Replication Manuscrite</title>
+    <link rel="stylesheet" type="text/css" href="{{url_for('static', filename='style.css')}}">
+</head>
+<body>
+<h1> Replication Manuscrite </h1>
+<form action="/generate_output" method="GET">
+    <label for="text_input">Text to be written out:</label>
+    <input type="text" autocomplete="off" id="text_input" name="text_input">
+    <button>Submit</button>
+</form>
+</body>
+</html>
