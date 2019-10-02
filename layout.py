@@ -56,7 +56,14 @@ def generate_layout(text, in_path, out_file):
         im.save(pathjoin(out_file))
 
 if __name__ == '__main__':
+    text = 'TeamFractals'
     in_path = 'out/sir'
-    if len(sys.argv) > 1:
-        in_path = sys.argv[1]
-    generate_layout(in_path)
+    out_file = 'out/generated.png'
+    if len(sys.argv) > 3:
+        text = sys.argv[1]
+        in_path = sys.argv[2]
+        out_file = sys.argv[3]
+    elif len(sys.argv) > 2:
+        text = sys.argv[1]
+        in_path = sys.argv[2]
+    generate_layout(text, in_path, out_file)
