@@ -59,6 +59,7 @@ def extract_roi(box_dir):
         roi = img[ymin:ymax, xmin:xmax]
         cv2.imwrite(box_dir + "/roi/" + name, roi)
         
+        """
         img = Image.open(box_dir + "/roi/" + name)
 
         ary = np.array(img)
@@ -71,11 +72,15 @@ def extract_roi(box_dir):
         
         # Standard RGB to grayscale 
         #bitmap = list(map(lambda x: 0.299*x[0]+0.587*x[1]+0.114*x[2], zip(r,g,b)))
-        bitmap = list(map(lambda x: 0.04*x[0]+0.12*x[1]+0.50*x[2], zip(r,g,b)))
+        
+        bitmap = list(map(lambda x: 0.01*x[0]+0.10*x[1]+0.50*x[2], zip(r,g,b)))
         bitmap = np.array(bitmap).reshape([ary.shape[0], ary.shape[1]])
         bitmap = np.dot((bitmap > 128).astype(float),255)
         im = Image.fromarray(bitmap.astype(np.uint8))
+        
         im.save(box_dir + "/roi/" + name)
+        
+        """
         
     return
 
