@@ -69,11 +69,11 @@ def extract_boxes(img_path):
     img_h = len(img)
     img_w = len(img[0])
 
-    hmin = 0.06 * img_h
-    hmax = 0.09 * img_h
+    hmin = 0.02 * img_h
+    hmax = 0.20 * img_h
 
-    wmin = 0.06 * img_w
-    wmax = 0.09 * img_w
+    wmin = 0.02 * img_w
+    wmax = 0.20 * img_w
 
     names = get_filename_list()
 
