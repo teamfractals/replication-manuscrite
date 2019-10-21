@@ -26,8 +26,8 @@ def extract_roi(box_dir):
         print("READING: " + box_dir + "/" + name)
         img = cv2.imread( box_dir + "/" + name)
         hsv = cv2.cvtColor(img, cv2.COLOR_BGR2HSV)
-        boundaries = [([0,50,60], [40, 255, 255]),
-                      ([135,50,60], [179, 255, 255])] 
+        boundaries = [([0,90,60], [40, 255, 255]),
+                      ([150,50,60], [179, 255, 255])] 
         
         mask = np.zeros((hsv.shape[0], hsv.shape[1]), dtype='uint8')
         for b in boundaries:
