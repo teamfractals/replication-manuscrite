@@ -1,9 +1,3 @@
-# -*- coding: utf-8 -*-
-"""
-Created on Wed Oct  2 23:09:54 2019
-
-@author: sharma
-"""
 from PIL import Image,ImageDraw
 from utils import get_filename_dict
 import sys
@@ -20,22 +14,38 @@ def generate_layout(text, in_path, out_file):
     CHAR_SPACING    = 4
     SPACE_REPR      = '_space_'
     SPACE_WIDTH     = 75
-    EXP_FIX         = 54
+    EXP_FIX         = 35
+    EXP_MID         = 30
+    EXP_TOP         = 54
+    EXP_BOTTOM      = 11
+    EXP_EXP         = 54
 
     im = Image.new('RGB', (PAGE_WIDTH, PAGE_HEIGHT), PAGE_COLOR)
-    """
+    '''
     # LINE DRAW
     draw = ImageDraw.Draw(im)
     for i in range(0,3400,80):
         if i%LING_SPACING!=0:
-            draw.line((0,i, 3400, i), fill=128, width=5)
-    """
-    exp_lis = ['f_small.png', 
+            draw.line((0,i, 3400, i), fill=128, width=2)
+    '''        
+    exp = ['f_small.png',
+           'p_small.png',
+           'j_small.png',
+           ]
+    exp_lis = [ 
                'g_small.png', 
-               'p_small.png',
                'y_small.png',
-               'j_small.png',
                'q_small.png']
+    sp_lis_up  = ['34_asterisk.png',
+                  '43_caret.png',
+                  '28_open_double_quote.png',
+                  '29_close_double_quote.png',
+                  '30_open_single_quote.png',
+                  '31_close_single_quote.png'
+                  ]
+    sp_lis_mid = ['41_equal.png',
+                  '23_semi_colon.png']
+    sp_lis_down = ['25_comma.png']
 
     file_list = []
     names = get_filename_dict()
@@ -81,6 +91,18 @@ def generate_layout(text, in_path, out_file):
             if img_name in exp_lis:
                 w,h = im_c.size
                 im.paste(im_c,(w_p, h_p-EXP_FIX))
+            elif img_name in sp_lis_up:
+                w,h = im_c.size
+                im.paste(im_c,(w_p, h_p-EXP_TOP))
+            elif img_name in sp_lis_mid:
+                w,h = im_c.size
+                im.paste(im_c,(w_p,h_p -EXP_MID ))
+            elif img_name in sp_lis_down:
+                w,h = im_c.size
+                im.paste(im_c,(w_p,h_p - EXP_BOTTOM))
+            elif img_name in exp:
+                w,h = im_c.size
+                im.paste(im_c,(w_p,h_p - EXP_EXP))    
             else:
                 w,h = im_c.size   
                 im.paste(im_c,(w_p,h_p-h))
@@ -88,7 +110,7 @@ def generate_layout(text, in_path, out_file):
     im.save(os.path.normpath(out_file))
 
 if __name__ == '__main__':
-    text = 'Team Fractals 1234'
+    text = "a=b, a = 'b * c', 'hell yeah' a^b, a-b,"
     in_path = 'out/sir'
     out_file = 'out/generated.png'
     if len(sys.argv) > 3:

@@ -35,7 +35,7 @@ def get_filename_dict():
     filenames['|']="37_vertical_bar.png"
     filenames['\\']="38_back_slash.png"
     filenames['>']="39_greater_than.png"
-    filenames['<']="40_lsee_than.png"
+    filenames['<']="40_less_than.png"
     filenames['=']="41_equal.png"
     filenames['@']="42_at_the_rate.png"
     filenames['^']="43_caret.png"
@@ -79,7 +79,7 @@ def get_filename_list():
     filenames.append("37_vertical_bar.png")
     filenames.append("38_back_slash.png")
     filenames.append("39_greater_than.png")
-    filenames.append("40_lsee_than.png")
+    filenames.append("40_less_than.png")
     filenames.append("41_equal.png")
     filenames.append("42_at_the_rate.png")
     filenames.append("43_caret.png")
