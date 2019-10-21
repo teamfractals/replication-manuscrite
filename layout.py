@@ -15,7 +15,7 @@ def generate_layout(text, in_path, out_file):
     SPACE_REPR      = '_space_'
     SPACE_WIDTH     = 75
     EXP_FIX         = 35
-    EXP_MID         = 30
+    EXP_MID         = 37
     EXP_TOP         = 54
     EXP_BOTTOM      = 11
     EXP_EXP         = 54
@@ -44,7 +44,9 @@ def generate_layout(text, in_path, out_file):
                   '31_close_single_quote.png'
                   ]
     sp_lis_mid = ['41_equal.png',
-                  '23_semi_colon.png']
+                  '23_semi_colon.png',
+                  '39_greater_than.png',
+                  '40_less_than.png']
     sp_lis_down = ['25_comma.png']
 
     file_list = []
