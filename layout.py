@@ -57,26 +57,44 @@ def generate_layout(text, in_path, out_file):
         else:
             file_list.append(SPACE_REPR)
     tot = 0
-    ind = 0
     ind_n = 0
     tot_curr = 0
 
     for i in file_list:
         if i == SPACE_REPR:
-            ind = ind_n
+            print("hey")
             tot_curr = tot
             tot += SPACE_WIDTH
             if tot > (PAGE_WIDTH - MARGIN_LEFT - MARGIN_RIGHT):
-                file_list[ind] ="line_break"
-                tot = tot - tot_curr
+                
+                
+                file_list.insert(ind_n,"line_break")
+               
+                if(file_list[ind_n+1] == SPACE_REPR):
+                    del([file_list[ind_n+1]])
+                if(file_list[ind_n-1] == SPACE_REPR):
+                    del([file_list[ind_n-1]])    
+                #tot = tot - tot_curr
+                tot =  MARGIN_LEFT
         else:
             im_c = Image.open(os.path.normpath(os.path.join(in_path, 'roi', i)))
             w, h = im_c.size
             tot += w + CHAR_SPACING
             print(str(tot)+"\n")
             if tot > (PAGE_WIDTH - MARGIN_LEFT - MARGIN_RIGHT):
-                tot = tot-tot_curr
-                file_list[ind] = "line_break"
+                
+                tot = MARGIN_LEFT
+                
+                file_list.insert(ind_n,"line_break")
+                
+                if(file_list[ind_n+1] == SPACE_REPR):
+                    del([file_list[ind_n+1]])
+                #if(file_list[ind_n-1] != SPACE_REPR):
+                #   file_list.insert(ind_n-1,"20_minus.png")
+                if(file_list[ind_n-1] == SPACE_REPR):
+                    del([file_list[ind_n-1]])
+                print(file_list[ind_n])    
+                
         ind_n += 1
         
     print(file_list)
@@ -110,7 +128,9 @@ def generate_layout(text, in_path, out_file):
                 im.paste(im_c,(w_p,h_p-h))
             w_p = w_p + w + CHAR_SPACING;
     im.save(os.path.normpath(out_file))
-
+              
+        
+    
 if __name__ == '__main__':
     text = "a=b, a = 'b * c', 'hell yeah' a^b, a-b,"
     in_path = 'out/sir'
