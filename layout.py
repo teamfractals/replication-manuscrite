@@ -51,8 +51,22 @@ def generate_layout(text, in_path, out_file):
 
     file_list = []
     names = get_filename_dict()
+    count1 = 0
+    count2 = 0
     for i in text:
-        if i != ' ':
+        if ( i == '"' and count1 == 0 ):
+            file_list.append(names.get(i,"28_open_double_quote.png"))
+            count1 = 1
+        elif (i == '"' and count1 == 1 ) :
+            file_list.append(names.get(i,"29_close_double_quote.png"))
+            count1 = 0
+        elif ( i == "'" and count2 == 0 ):
+            file_list.append(names.get(i,"30_open_single_quote.png"))
+            count2 = 1
+        elif (i == "'" and count2 == 1):
+            file_list.append(names.get(i,"31_close_single_quote.png"))
+            count2 = 0
+        elif i != ' ':
             file_list.append(names.get(i, '8.png'))
         else:
             file_list.append(SPACE_REPR)
