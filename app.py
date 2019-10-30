@@ -1,6 +1,6 @@
 from flask import Flask, render_template, request, url_for
 from extract_boxes import extract_boxes
-from extract_roi import extract_roi
+from extract_roi import extract_roi_for_dir
 from layout import generate_layout
 from random import randint
 
@@ -15,7 +15,7 @@ def upload():
     imagefile = request.files.get('template_input', '')
     imagefile.save('out/filled_template.jpg')
     extract_boxes("out/filled_template.jpg")
-    extract_roi("out/filled_template")
+    extract_roi_for_dir("out/filled_template")
     return render_template('text_input.html')
 
 @app.route("/generate_output")
