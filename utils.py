@@ -1,3 +1,6 @@
+from PIL import Image
+import os
+
 def get_filename_dict():
     filenames = {}
     for a in range(26):
@@ -85,4 +88,10 @@ def get_filename_list():
     filenames.append("42_at_the_rate.png")
     filenames.append("43_caret.png")
     return filenames
-    
+
+def img2pdf(img_list=None, path_list=None, out_dir="out"):
+    generated_pdf = os.path.join(out_dir, "generated.pdf")
+    if img_list is None:
+        img_list = [Image.open(path) for path in path_list]
+    img_list[0].save(generated_pdf, "PDF", resolution = 100.0, save_all = True, append_images = img_list[1:])
+

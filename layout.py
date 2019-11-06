@@ -1,33 +1,12 @@
 from PIL import Image,ImageDraw
 from utils import get_filename_dict
+from utils import img2pdf
+from page_config import *
 import sys
 import os
 
-def generate_layout(text, in_path, out_file):
-    PAGE_WIDTH      = 2480
-    PAGE_HEIGHT     = 3508
-    PAGE_COLOR      = (255, 255, 255)
-    MARGIN_LEFT     = 80
-    MARGIN_RIGHT    = 80
-    MARGIN_TOP      = 240
-    LING_SPACING    = 130
-    CHAR_SPACING    = 4
-    SPACE_REPR      = '_space_'
-    SPACE_WIDTH     = 75
-    EXP_FIX         = 35
-    EXP_MID         = 37
-    EXP_TOP         = 54
-    EXP_BOTTOM      = 11
-    EXP_EXP         = 54
-
+def generate_layout(text, in_path, out_dir):
     im = Image.new('RGB', (PAGE_WIDTH, PAGE_HEIGHT), PAGE_COLOR)
-    '''
-    # LINE DRAW
-    draw = ImageDraw.Draw(im)
-    for i in range(0,3400,80):
-        if i%LING_SPACING!=0:
-            draw.line((0,i, 3400, i), fill=128, width=2)
-    '''        
     exp = ['f_small.png',
            'p_small.png',
            'j_small.png',
@@ -85,46 +64,40 @@ def generate_layout(text, in_path, out_file):
             
             tot += SPACE_WIDTH
             if tot > (PAGE_WIDTH - MARGIN_LEFT - MARGIN_RIGHT):
-                
-                
                 file_list.insert(ind_n,"line_break")
-               
                 if(file_list[ind_n+1] == SPACE_REPR):
                     del([file_list[ind_n+1]])
                 if(file_list[ind_n-1] == SPACE_REPR):
                     del([file_list[ind_n-1]])    
-                
-                tot =  MARGIN_LEFT
+                tot = MARGIN_LEFT
           elif i != "line_break":
             im_c = Image.open(os.path.normpath(os.path.join(in_path, 'roi', i)))
             w, h = im_c.size
             tot += w + CHAR_SPACING
             print(str(tot)+"\n")
             if tot > (PAGE_WIDTH - MARGIN_LEFT - MARGIN_RIGHT):
-                
                 tot = MARGIN_LEFT
-                
                 file_list.insert(ind_n,"line_break")
                 if(file_list[ind_n-1] == SPACE_REPR):
                     del([file_list[ind_n-1]])
                 else:
                     file_list.insert(ind_n,"20_minus.png")
-                 
-                
                 if(file_list[ind_n+1] == SPACE_REPR):
                     del([file_list[ind_n+1]])
                 #if(file_list[ind_n-1] != SPACE_REPR):
                 #   file_list.insert(ind_n-1,"20_minus.png")
-               
                 print(file_list[ind_n])    
-                
           ind_n += 1
+
     print("controlD") 
     print(file_list)
-    i= 0
+    i = 0
     w_p = MARGIN_LEFT
     h_p = MARGIN_TOP
     
+    os.makedirs(out_dir, exist_ok=True)
+    path_list = []
+
     for img_name in file_list:    
         if img_name == "line_break":
             w_p = MARGIN_LEFT
@@ -140,13 +113,13 @@ def generate_layout(text, in_path, out_file):
             im_c = Image.open(os.path.normpath(os.path.join(in_path, 'roi', img_name)))
             if img_name in exp_lis:
                 w,h = im_c.size
-                im.paste(im_c,(w_p, h_p-EXP_FIX))
+                im.paste(im_c,(w_p, h_p - EXP_FIX))
             elif img_name in sp_lis_up:
                 w,h = im_c.size
-                im.paste(im_c,(w_p, h_p-EXP_TOP))
+                im.paste(im_c,(w_p, h_p - EXP_TOP))
             elif img_name in sp_lis_mid:
                 w,h = im_c.size
-                im.paste(im_c,(w_p,h_p -EXP_MID ))
+                im.paste(im_c,(w_p,h_p - EXP_MID ))
             elif img_name in sp_lis_down:
                 w,h = im_c.size
                 im.paste(im_c,(w_p,h_p - EXP_BOTTOM))
@@ -157,24 +130,28 @@ def generate_layout(text, in_path, out_file):
                 w,h = im_c.size   
                 im.paste(im_c,(w_p,h_p-h))
             w_p = w_p + w + CHAR_SPACING;
-        if h_p >= 3508 :
-         w_p = MARGIN_LEFT
-         h_p = MARGIN_TOP   
-         im.save(os.path.normpath(out_file + str(i) +".png"))
-         i += 1
-         im = Image.new('RGB', (PAGE_WIDTH, PAGE_HEIGHT), PAGE_COLOR)
-    im.save(os.path.normpath(out_file + str(i) +".png"))     
-        
+        if h_p >= PAGE_HEIGHT - MARGIN_BOTTOM:
+            w_p = MARGIN_LEFT
+            h_p = MARGIN_TOP   
+            save_path = os.path.join(out_dir, str(i) + ".png")
+            im.save(save_path)
+            path_list.append(save_path)
+            i += 1
+            im = Image.new('RGB', (PAGE_WIDTH, PAGE_HEIGHT), PAGE_COLOR)
+    save_path = os.path.join(out_dir, str(i) + ".png")
+    im.save(save_path)     
+    path_list.append(save_path)
+    img2pdf(path_list=path_list, out_dir=out_dir)
     
 if __name__ == '__main__':
     text = "a=b, a = 'b * c', 'hostel' a^b, a-b,"
     in_path = 'out/sir'
-    out_file = 'out/generated'
+    out_dir = 'out/generated'
     if len(sys.argv) > 3:
         text = sys.argv[1]
         in_path = sys.argv[2]
-        out_file = sys.argv[3]
+        out_dir = sys.argv[3]
     elif len(sys.argv) > 2:
         text = sys.argv[1]
         in_path = sys.argv[2]
-    generate_layout(text, in_path, out_file)
+    generate_layout(text, in_path, out_dir)

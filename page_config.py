@@ -1,0 +1,17 @@
+PAGE_WIDTH      = 2480
+PAGE_HEIGHT     = 3508
+PAGE_COLOR      = (255, 255, 255)
+MARGIN_LEFT     = 120
+MARGIN_RIGHT    = 120
+MARGIN_TOP      = 240
+MARGIN_BOTTOM   = 240
+LING_SPACING    = 130
+CHAR_SPACING    = 4
+SPACE_REPR      = '_space_'
+SPACE_WIDTH     = 75
+EXP_FIX         = 35
+EXP_MID         = 37
+EXP_TOP         = 54
+EXP_BOTTOM      = 11
+EXP_EXP         = 54
+
