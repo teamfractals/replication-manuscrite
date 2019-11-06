@@ -23,7 +23,7 @@ else: out_path = input('Output path to use instead: ')
 if infile is None:
     text = input('Text to print out:\n')
 else:
-    with open(infile, 'r') as f:
+    with open(infile, 'r',encoding = "utf8") as f:
         text = f.read()
 
 generate_layout(text, out_path, 'out/__generated__')

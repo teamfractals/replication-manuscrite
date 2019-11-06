@@ -25,14 +25,14 @@ def generate_layout(text, in_path, out_dir):
     sp_lis_mid = ['41_equal.png',
                   '23_semi_colon.png',
                   '39_greater_than.png',
-                  '40_less_than.png']
+                  '40_less_than.png',
+                  "20_minus.png"]
     sp_lis_down = ['25_comma.png']
 
     file_list = []
     names = get_filename_dict()
     count1 = 0
     count2 = 0
-    print("controlB")
     for i in text:
         if ( i == '"' and count1 == 0 ):
             file_list.append(names.get(i,"28_open_double_quote.png"))
@@ -47,7 +47,6 @@ def generate_layout(text, in_path, out_dir):
             file_list.append(names.get(i,"31_close_single_quote.png"))
             count2 = 0
         elif i == "\r" or i == "\n":
-            print("found it\n")
             file_list.append("EnterKey")
         elif i != ' ':
             file_list.append(names.get(i, '8.png'))
@@ -55,12 +54,10 @@ def generate_layout(text, in_path, out_dir):
             file_list.append(SPACE_REPR)
     tot = 0
     ind_n = 0
-    print("controlC")
     for i in file_list:
           if i == "EnterKey":
               tot = MARGIN_LEFT
           elif i == SPACE_REPR:
-            print("hey")
             
             tot += SPACE_WIDTH
             if tot > (PAGE_WIDTH - MARGIN_LEFT - MARGIN_RIGHT):
@@ -74,7 +71,7 @@ def generate_layout(text, in_path, out_dir):
             im_c = Image.open(os.path.normpath(os.path.join(in_path, 'roi', i)))
             w, h = im_c.size
             tot += w + CHAR_SPACING
-            print(str(tot)+"\n")
+            #print(str(tot)+"\n")
             if tot > (PAGE_WIDTH - MARGIN_LEFT - MARGIN_RIGHT):
                 tot = MARGIN_LEFT
                 file_list.insert(ind_n,"line_break")
@@ -86,11 +83,10 @@ def generate_layout(text, in_path, out_dir):
                     del([file_list[ind_n+1]])
                 #if(file_list[ind_n-1] != SPACE_REPR):
                 #   file_list.insert(ind_n-1,"20_minus.png")
-                print(file_list[ind_n])    
+                #print(file_list[ind_n])    
           ind_n += 1
 
-    print("controlD") 
-    print(file_list)
+    #print(file_list)
     i = 0
     w_p = MARGIN_LEFT
     h_p = MARGIN_TOP
