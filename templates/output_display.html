@@ -40,57 +40,18 @@
           </div>
         </nav>
 
-        <!-- HERO -->
-        <div class="hero">
-          <div class="wrap grid-x grid-margin-x">
-            <div class="small-12 medium-7 cell">
-              <h1>Painless Handwriting</h1>
-              <p>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor 
-                incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis 
-                nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. 
-                Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore 
-                eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt 
-                in culpa qui officia deserunt mollit anim id est laborum.
-              </p>
-            </div>
-          </div>
+      <!-- OUTPUT SECTION -->
+      <div class="wrap main-body">
+        <h1>Generated Document</h1>
+        <a class="button center-big-button success" href="{{url_for('static', filename='__generated__/generated.pdf')}}">
+          Download as PDF
+        </a>
+        <div class="img-container">
+        {% for page in page_seq %}
+            <img src="{{url_for('static', filename='__generated__/'+page)}}?dummy={{random}}">
+        {% endfor %}
         </div>
       </div>
-
-      <!-- MAIN BODY -->
-      <div class="thinner-wrap main-body">
-        <h1>Get Started</h1>
-          <ul>
-            <li>
-              <p>
-                First, download the template for characters and then after filling it out with a 
-                red pen, get it scanned and upload the filled out template as an image.
-              </p>
-            </li>
-
-            <li>
-              <p>
-                Next, you will be presented with a form to write whatever text you want to print 
-                out in your handwriting.
-              </p>
-            </li>
-
-            <li>
-              <p>
-                Finally, you will be presented the generated handwritten document as a PDF.
-              </p>
-            </li>
-          </ul>
-          <div class=button-group-container>
-            <div class="button-group">
-              <a class="button" href='{{url_for("static", filename="template.pdf")}}'>Get Template</a>
-              <a class="button" href="/upload">Upload Template</a>
-            </div>
-          </div>
-      </div>
-
-
       <!-- FOOTER -->
       <footer>
         <div class="wrap grid-x grid-margin-x small-up-1 medium-up-3">

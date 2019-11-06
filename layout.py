@@ -138,6 +138,7 @@ def generate_layout(text, in_path, out_dir):
     im.save(save_path)     
     path_list.append(save_path)
     img2pdf(path_list=path_list, out_dir=out_dir)
+    return len(path_list)
     
 if __name__ == '__main__':
     text = "a=b, a = 'b * c', 'hostel' a^b, a-b,"

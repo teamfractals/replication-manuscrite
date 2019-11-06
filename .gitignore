@@ -2,4 +2,4 @@
 out/*
 env/*
 .idea/*
-static/generated.png
+static/__generated__/*

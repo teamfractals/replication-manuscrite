@@ -1,0 +1,206 @@
+/* ******************************************************************
+    GENERAL
+****************************************************************** */
+* {
+    outline: none;
+}
+
+.wrap {
+    margin: 0 5%;
+}
+
+.thinner-wrap {
+    margin: 0 15%;
+}
+
+.reveal {
+    background-color: transparent;
+    border: none;
+    padding: 0;
+}
+
+/* ******************************************************************
+    FORM
+****************************************************************** */
+
+.auth-form {
+    display: block;
+    border-radius: 15px;
+    background-color: #ccc;
+    min-width: 50px;
+    min-height: 200px;
+    height: 95%;
+    padding: 20px;
+    padding-bottom: 30px;
+}
+
+.auth-form p {
+    text-align: center;
+    width: 100%;
+    color: rgba(0, 0, 0, 0.8);
+}
+
+/* ******************************************************************
+    MOBILE NAV
+****************************************************************** */
+.title-bar {
+    height: 60px;
+    background-color: #222;
+}
+
+/* ******************************************************************
+    DESKTOP NAV
+****************************************************************** */
+.top-bar {
+    background-color: #222;
+    height: 80px;
+    padding: 0 30px;
+}
+
+.top-bar .menu {
+    height: 80px;
+    background-color: transparent;
+}
+
+.top-bar a {
+    color: rgba(255, 255, 255, 0.9);
+    line-height: 80px;
+    padding: 0 20px;
+}
+
+.top-bar a:hover {
+    background-color: rgba(255, 255, 255, 0.05);
+}
+
+.site-title {
+    color: rgba(255, 255, 255, 0.9);
+}
+
+/* ******************************************************************
+    HERO / LOGIN
+****************************************************************** */
+.hero {
+    padding: 50px 0;
+    background-image: url("../img/pattern_prism.png");
+}
+
+.hero h1,
+.hero p {
+    color: rgba(255, 255, 255, 0.9);
+}
+
+.hero form p {
+    color: rgba(0, 0, 0, 0.8);
+}
+
+/* ******************************************************************
+    MAIN BODY
+****************************************************************** */
+.main-body h1 {
+    display: block;
+    text-align: center;
+    width: 100%;
+}
+
+.main-body .cell {
+    padding: 20px 0;
+}
+
+.main-body {
+    padding: 50px 0 0 0;
+}
+
+.main-body .button-group-container {
+    margin-top: 40px;
+    text-align: center;
+}
+
+.main-body .button-group {
+    display: inline-block;
+}
+
+.button {
+    font-weight: bold;
+}
+
+.main-body .img-container {
+    padding: 30px 80px;
+    background-color: #333;
+}
+
+.main-body img {
+    margin-bottom: 10px;
+}
+
+input[type="file"] {
+    display: None;
+}
+
+.center-big-button {
+    display: block;
+    margin: 20px auto;
+    width: 30%;
+    font-size: 105%;
+}
+
+.upload-form h2 {
+    text-align: center;
+    padding-bottom: 50px;
+}
+
+/* ******************************************************************
+    SAMPLES DISPLAY
+****************************************************************** */
+
+.sample-display {
+    min-height: 200px;
+    padding: 30px 0;
+}
+
+/* ******************************************************************
+    FOOTER
+****************************************************************** */
+footer {
+    margin-top: 50px;
+    padding: 50px 0;
+    background-color: #222;
+}
+
+footer h4 {
+    color: rgba(255, 255, 255, 0.8);
+}
+
+footer a {
+    display: block;
+    color: rgba(255, 255, 255, 0.6);
+}
+
+footer a:hover {
+    color: rgba(255, 255, 255, 0.8);
+}
+
+footer hr {
+    border-color: rgba(255, 255, 255, 0.2);
+}
+
+/* ******************************************************************
+    MEDIA QUERIES
+****************************************************************** */
+@media (max-width: 639px) {
+    .nav-desktop {
+        display: none;
+    }
+    .reveal .auth-form {
+        border-radius: 0;
+        margin: 0;
+    }
+    .reveal {
+        background-color: #ccc;
+    }
+    .thinner-wrap {
+        margin: 0 5%;
+    }
+    .center-big-button {
+        width: 80%;
+    }
+}

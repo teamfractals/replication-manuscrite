@@ -1,15 +1,84 @@
 <!doctype html>
-<html>
-<head>
+<html class="no-js" lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Replication Manuscrite</title>
-    <link rel="stylesheet" type="text/css" href="{{url_for('static', filename='style.css')}}">
-</head>
-<body>
-<h1> Replication Manuscrite </h1>
-<form action="/generate_output" method="GET">
-    <label for="text_input">Text to be written out:</label>
-    <input type="text" autocomplete="off" id="text_input" name="text_input">
-    <button>Submit</button>
-</form>
-</body>
+    <link rel="stylesheet" href="{{url_for('static', filename='css/foundation.css')}}">
+    <link rel="stylesheet" href="{{url_for('static', filename='css/app.css')}}">
+  </head>
+  <body>
+
+    <div class="off-canvas-wrapper">
+      <div class="off-canvas position-left" id="offCanvas" data-off-canvas>
+        <!-- Your menu or Off-canvas content goes here -->
+      </div>
+
+      <div class="off-canvas-content" data-off-canvas-content>
+        <!-- Your page content lives here -->
+
+        <!-- MOBILE NAV -->
+        <nav class="title-bar show-for-small-only">
+          <div class="title-bar-left">
+            <button class="menu-icon" type="button" data-open="offCanvas"></button>
+            <span class="title-bar-title">Replication Manuscrite</span>
+          </div>
+        </nav>
+
+        <!-- DESKTOP NAV-->
+        <nav class="top-bar nav-desktop">
+          <div class="top-bar-left">
+              <h3 class="site-title">Replication Manuscrite</h3>
+          </div>
+          <div class="top-bar-right">
+            <ul class="menu">
+              <li><a href="#">About</a></li>
+              <li><a href="#">Contact Us</a></li>
+              <li><a href="#">Terms</a></li>
+            </ul>
+          </div>
+        </nav>
+
+      <!-- MAIN SECTION -->
+      <div class="wrap main-body">
+        <form action="/generate" method="POST">
+          <textarea id="text_input" name="text_input" placeholder="Write your text here..." rows="15" autofocus="on"></textarea>
+          <button type="submit" class="center-big-button button">Submit</button>
+        </form>
+      </div>
+
+      <!-- FOOTER -->
+      <footer>
+        <div class="wrap grid-x grid-margin-x small-up-1 medium-up-3">
+          <div class="cell">
+            <h4>Contact Info</h4>
+            <hr>
+            <a href="#"><span>Phone</span> 234 234 2345</a>
+            <a href="#"><span>Email</span> info@company.com</a>
+            <a href="#"><span>Address</span> 123 Center Street</a>
+          </div>
+          <div class="cell">
+            <h4>Site Map</h4>
+            <hr>
+            <a href="#">About Us</a>
+            <a href="#">Services</a>
+            <a href="#">Contact Us</a>
+          </div>
+          <div class="cell">
+            <h4>Social Media</h4>
+            <hr>
+            <a href="#">Facebook</a>
+            <a href="#">Instagram</a>
+            <a href="#">Twitter</a>
+          </div>
+        </div>
+      </footer>
+    </div>
+
+    <script src="{{url_for('static', filename='js/vendor/jquery.js')}}"></script>
+    <script src="{{url_for('static', filename='js/vendor/what-input.js')}}"></script>
+    <script src="{{url_for('static', filename='js/vendor/foundation.js')}}"></script>
+    <script src="{{url_for('static', filename='js/app.js')}}"></script>
+  </body>
 </html>
