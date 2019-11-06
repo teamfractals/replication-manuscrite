@@ -53,6 +53,7 @@ def generate_layout(text, in_path, out_file):
     names = get_filename_dict()
     count1 = 0
     count2 = 0
+    print("controlB")
     for i in text:
         if ( i == '"' and count1 == 0 ):
             file_list.append(names.get(i,"28_open_double_quote.png"))
@@ -66,18 +67,22 @@ def generate_layout(text, in_path, out_file):
         elif (i == "'" and count2 == 1):
             file_list.append(names.get(i,"31_close_single_quote.png"))
             count2 = 0
+        elif i == "\r" or i == "\n":
+            print("found it\n")
+            file_list.append("EnterKey")
         elif i != ' ':
             file_list.append(names.get(i, '8.png'))
         else:
             file_list.append(SPACE_REPR)
     tot = 0
     ind_n = 0
-    tot_curr = 0
-
+    print("controlC")
     for i in file_list:
-        if i == SPACE_REPR:
+          if i == "EnterKey":
+              tot = MARGIN_LEFT
+          elif i == SPACE_REPR:
             print("hey")
-            tot_curr = tot
+            
             tot += SPACE_WIDTH
             if tot > (PAGE_WIDTH - MARGIN_LEFT - MARGIN_RIGHT):
                 
@@ -88,9 +93,9 @@ def generate_layout(text, in_path, out_file):
                     del([file_list[ind_n+1]])
                 if(file_list[ind_n-1] == SPACE_REPR):
                     del([file_list[ind_n-1]])    
-                #tot = tot - tot_curr
+                
                 tot =  MARGIN_LEFT
-        else:
+          elif i != "line_break":
             im_c = Image.open(os.path.normpath(os.path.join(in_path, 'roi', i)))
             w, h = im_c.size
             tot += w + CHAR_SPACING
@@ -100,26 +105,37 @@ def generate_layout(text, in_path, out_file):
                 tot = MARGIN_LEFT
                 
                 file_list.insert(ind_n,"line_break")
+                if(file_list[ind_n-1] == SPACE_REPR):
+                    del([file_list[ind_n-1]])
+                else:
+                    file_list.insert(ind_n,"20_minus.png")
+                 
                 
                 if(file_list[ind_n+1] == SPACE_REPR):
                     del([file_list[ind_n+1]])
                 #if(file_list[ind_n-1] != SPACE_REPR):
                 #   file_list.insert(ind_n-1,"20_minus.png")
-                if(file_list[ind_n-1] == SPACE_REPR):
-                    del([file_list[ind_n-1]])
+               
                 print(file_list[ind_n])    
                 
-        ind_n += 1
-        
+          ind_n += 1
+    print("controlD") 
     print(file_list)
+    i= 0
     w_p = MARGIN_LEFT
     h_p = MARGIN_TOP
+    
     for img_name in file_list:    
         if img_name == "line_break":
             w_p = MARGIN_LEFT
             h_p += LING_SPACING
+            
+        elif img_name == "EnterKey":
+            w_p = MARGIN_LEFT
+            h_p += LING_SPACING    
         elif img_name == SPACE_REPR:
             w_p = w_p + SPACE_WIDTH
+            
         else:
             im_c = Image.open(os.path.normpath(os.path.join(in_path, 'roi', img_name)))
             if img_name in exp_lis:
@@ -141,14 +157,19 @@ def generate_layout(text, in_path, out_file):
                 w,h = im_c.size   
                 im.paste(im_c,(w_p,h_p-h))
             w_p = w_p + w + CHAR_SPACING;
-    im.save(os.path.normpath(out_file))
-              
+        if h_p >= 3508 :
+         w_p = MARGIN_LEFT
+         h_p = MARGIN_TOP   
+         im.save(os.path.normpath(out_file + str(i) +".png"))
+         i += 1
+         im = Image.new('RGB', (PAGE_WIDTH, PAGE_HEIGHT), PAGE_COLOR)
+    im.save(os.path.normpath(out_file + str(i) +".png"))     
         
     
 if __name__ == '__main__':
-    text = "a=b, a = 'b * c', 'hell yeah' a^b, a-b,"
+    text = "a=b, a = 'b * c', 'hostel' a^b, a-b,"
     in_path = 'out/sir'
-    out_file = 'out/generated.png'
+    out_file = 'out/generated'
     if len(sys.argv) > 3:
         text = sys.argv[1]
         in_path = sys.argv[2]
