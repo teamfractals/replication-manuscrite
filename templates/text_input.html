@@ -42,8 +42,8 @@
 
       <!-- MAIN SECTION -->
       <div class="wrap main-body">
-        <form action="/generate" method="POST">
-          <textarea id="text_input" name="text_input" placeholder="Write your text here..." rows="15" autofocus="on"></textarea>
+        <form action="{{action}}" method="POST">
+          <textarea name="{{input_name}}" placeholder="Write your text here..." rows="15" autofocus="on"></textarea>
           <button type="submit" class="center-big-button button">Submit</button>
         </form>
       </div>

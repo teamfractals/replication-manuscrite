@@ -23,12 +23,26 @@ def uploaded():
     imagefile.save('out/filled_template.jpg')
     extract_boxes("out/filled_template.jpg")
     extract_roi_for_dir("out/filled_template")
-    return render_template('text_input.html')
+    return render_template('text_input.html', input_name="text_input", action='/generate')
 
 @app.route("/generate", methods=['POST'])
 def generate():
     text = request.form['text_input']
     npages = generate_layout(text, "out/filled_template", "static/__generated__")
+    page_seq = [str(i) + ".png" for i in range(npages)]
+    return render_template('output_display.html', page_seq=page_seq, random=randint(0, 100000))
+
+@app.route("/demo")
+def demo():
+    return render_template('text_input.html', input_name="demo_input", action='/demo_output')
+
+@app.route("/demo_output", methods=['POST'])
+def demo_output():
+    text = request.form['demo_input']
+    if not os.path.exists("out/demo_filled"):
+        extract_boxes("static/demo_filled.jpg")
+        extract_roi_for_dir("out/demo_filled")
+    npages = generate_layout(text, "out/demo_filled", "static/__generated__")
     page_seq = [str(i) + ".png" for i in range(npages)]
     return render_template('output_display.html', page_seq=page_seq, random=randint(0, 100000))
 

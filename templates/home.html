@@ -81,11 +81,16 @@
               </p>
             </li>
           </ul>
-          <div class="button-group-container">
-            <div class="button-group">
-              <a class="button" target="_blank" href='{{url_for("static", filename="template.pdf")}}'>Get Template</a>
-              <a class="button" href="/upload">Start!</a>
-            </div>
+          <div class="grid-margin-x grid-x">
+            <a class="secondary button small-12 medium-4 cell" target="_blank" href='{{url_for("static", filename="template.pdf")}}'>
+              Get Template
+            </a>
+            <a class="button small-12 medium-4 cell" href="/demo">
+              Try a demo!
+            </a>
+            <a class="success button small-12 medium-4 cell" href="/upload">
+              Start!
+            </a>
           </div>
       </div>
 

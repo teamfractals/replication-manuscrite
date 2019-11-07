@@ -48,6 +48,18 @@
     background-color: #222;
 }
 
+.title-bar a {
+    color: rgba(255, 255, 255, 0.9);
+    display: inline-block;
+    line-height: 60px;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+.title-bar a:hover {
+    background-color: rgba(255, 255, 255, 0.05);
+}
+
 /* ******************************************************************
     DESKTOP NAV
 ****************************************************************** */
@@ -74,6 +86,7 @@
 
 .site-title {
     color: rgba(255, 255, 255, 0.9);
+    font-weight: bold;
 }
 
 .top-bar .site-title a:hover {
@@ -110,17 +123,12 @@
     padding: 20px 0;
 }
 
+.main-body ul {
+    margin-bottom: 50px;
+}
+
 .main-body {
     padding: 50px 0 0 0;
-}
-
-.main-body .button-group-container {
-    margin-top: 40px;
-    text-align: center;
-}
-
-.main-body .button-group {
-    display: inline-block;
 }
 
 .button {
@@ -143,13 +151,18 @@ input[type="file"] {
 .center-big-button {
     display: block;
     margin: 20px auto;
-    width: 30%;
+    width: 50%;
     font-size: 105%;
 }
 
 .upload-form h2 {
     text-align: center;
-    padding-bottom: 50px;
+    padding-bottom: 30px;
+}
+
+.upload-form {
+    margin-top: 40px;
+    margin-bottom: 100px;
 }
 
 /* ******************************************************************
@@ -206,6 +219,18 @@ footer hr {
     }
     .wrap {
         margin: 0 2%;
+    }
+}
+
+@media (max-width: 750px) {
+    .nav-desktop {
+        font-size: 90%;
+    }
+    .site-title {
+        font-size: 150%;
+    }
+    .top-bar {
+        height: 70px;
     }
     .center-big-button {
         width: 80%;
