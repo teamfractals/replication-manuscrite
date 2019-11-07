@@ -44,6 +44,22 @@
       <div class="wrap main-body">
         <form action="{{action}}" method="POST">
           <textarea name="{{input_name}}" placeholder="Write your text here..." rows="15" autofocus="on"></textarea>
+          <div class="grid-x">
+            <div class="cell filler medium-3 small-0"></div>
+            <div class="cell medium-2 small-4" id="redradioContainer">
+              <input type="radio" name="pencolor" value="red" id="redradio" checked>
+              <label for="redradio">Red</label>
+            </div>
+            <div class="cell medium-2 small-4" id="blueradioContainer">
+              <input type="radio" name="pencolor" value="blue" id="blueradio">
+              <label for="blueradio">Blue</label>
+            </div>
+            <div class="cell medium-2 small-4" id="greenradioContainer">
+              <input type="radio" name="pencolor" value="green" id="greenradio">
+              <label for="greenradio">Green</label>
+            </div>
+            <div class="cell filler medium-3 small-0"></div>
+          </div>
           <button type="submit" class="center-big-button button">Submit</button>
         </form>
       </div>

@@ -19,6 +19,10 @@
     padding: 0;
 }
 
+[type="radio"] {
+    margin: 0;
+}
+
 /* ******************************************************************
     FORM
 ****************************************************************** */
@@ -166,6 +170,31 @@ input[type="file"] {
     margin-bottom: 100px;
 }
 
+#redradioContainer {
+    background-color: #F64A4A;
+    padding: 10px;
+    text-align: center;
+}
+#blueradioContainer {
+    background-color: #305876;
+    padding: 10px;
+    text-align: center;
+}
+#greenradioContainer {
+    background-color: #569260;
+    padding: 10px;
+    text-align: center;
+}
+
+label[for="redradio"],
+label[for="blueradio"],
+label[for="greenradio"] {
+    color: white;
+    font-weight: bold;
+    font-size: 105%;
+}
+
+
 /* ******************************************************************
     SAMPLES DISPLAY
 ****************************************************************** */
@@ -204,6 +233,18 @@ footer hr {
 /* ******************************************************************
     MEDIA QUERIES
 ****************************************************************** */
+@media (max-width: 750px) {
+    .nav-desktop {
+        font-size: 90%;
+    }
+    .site-title {
+        font-size: 150%;
+    }
+    .top-bar {
+        height: 70px;
+    }
+}
+
 @media (max-width: 639px) {
     .nav-desktop {
         display: none;
@@ -221,19 +262,10 @@ footer hr {
     .wrap {
         margin: 0 2%;
     }
-}
-
-@media (max-width: 750px) {
-    .nav-desktop {
-        font-size: 90%;
-    }
-    .site-title {
-        font-size: 150%;
-    }
-    .top-bar {
-        height: 70px;
-    }
     .center-big-button {
-        width: 80%;
+        width: 100%;
+    }
+    .filler {
+        display: none;
     }
 }

@@ -8,6 +8,10 @@ from random import randint
 
 app = Flask(__name__)
 
+hue_sat = {"red": (None, None),
+           "blue": (117, 100),
+           "green": (64, 105)}
+
 @app.route("/")
 def home():
     return render_template('home.html')
@@ -28,7 +32,10 @@ def uploaded():
 @app.route("/generate", methods=['POST'])
 def generate():
     text = request.form['text_input']
-    npages = generate_layout(text, "out/filled_template", "static/__generated__")
+    pencolor = request.form['pencolor']
+
+    h, s = hue_sat.get(pencolor, (None, None))
+    npages = generate_layout(text, "out/filled_template", "static/__generated__", hue=h, sat=s)
     page_seq = [str(i) + ".png" for i in range(npages)]
     return render_template('output_display.html', page_seq=page_seq, random=randint(0, 100000))
 
@@ -39,10 +46,15 @@ def demo():
 @app.route("/demo_output", methods=['POST'])
 def demo_output():
     text = request.form['demo_input']
+    pencolor = request.form['pencolor']
     if not os.path.exists("out/demo_filled"):
         extract_boxes("static/demo_filled.jpg")
         extract_roi_for_dir("out/demo_filled")
-    npages = generate_layout(text, "out/demo_filled", "static/__generated__")
+
+    print('Pencolor received:', pencolor)
+    h, s = hue_sat.get(pencolor, (None, None))
+    print('Hue:', h, 'Sat:', s)
+    npages = generate_layout(text, "out/demo_filled", "static/__generated__", hue=h, sat=s)
     page_seq = [str(i) + ".png" for i in range(npages)]
     return render_template('output_display.html', page_seq=page_seq, random=randint(0, 100000))
 
