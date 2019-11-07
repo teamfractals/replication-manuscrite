@@ -1,5 +1,9 @@
-from PIL import Image
 import os
+
+import cv2
+import numpy as np
+from PIL import Image
+
 
 def get_filename_dict():
     filenames = {}
@@ -90,8 +94,33 @@ def get_filename_list():
     return filenames
 
 def img2pdf(img_list=None, path_list=None, out_dir="out"):
+    '''
+    Converts a list of PIL Image objects (or a list of image paths) to a PDF
+    '''
     generated_pdf = os.path.join(out_dir, "generated.pdf")
     if img_list is None:
         img_list = [Image.open(path) for path in path_list]
     img_list[0].save(generated_pdf, "PDF", resolution = 100.0, save_all = True, append_images = img_list[1:])
 
+def convert_hue(img, hue_val=None, sat_val=None):
+    '''
+    Sets the hue value for all pixels in an PIL Image to hue_val
+    and thresholds the saturation value to sat_val.
+    
+
+    Note that the hue values accepted range from 0 to 179 (following openCV's pattern),
+    while the saturation values range from 0 to 255.
+    '''
+    if hue_val is None and sat_val is None:
+        return img
+    cv2_img = np.asarray(img)
+    cv2_hsv = cv2.cvtColor(cv2_img, cv2.COLOR_RGB2HSV)
+    
+    if hue_val is not None:
+        cv2_hsv[:, :, 0] = hue_val
+    if sat_val is not None:
+        cv2_hsv[cv2_hsv[:, :, 1] > sat_val] = sat_val
+
+    cv2_converted = cv2.cvtColor(cv2_hsv, cv2.COLOR_HSV2RGB)
+    pil_converted = Image.fromarray(cv2_converted)
+    return pil_converted

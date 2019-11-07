@@ -26,5 +26,13 @@ else:
     with open(infile, 'r',encoding = "utf8") as f:
         text = f.read()
 
-generate_layout(text, out_path, 'out/__generated__')
+hue = None
+if input('Do you want to specify a new hue? (y/n) ').lower() == 'y':
+    hue = int(input('Enter hue (0-179): '))
+
+sat = None
+if input('Do you want to specify a new saturation? (y/n) ').lower() == 'y':
+    sat = int(input('Enter sat (0-255): '))
+
+generate_layout(text, out_path, 'out/__generated__', hue, sat)
 print('DONE')

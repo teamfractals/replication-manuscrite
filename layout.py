@@ -4,9 +4,10 @@ import sys
 from PIL import Image, ImageDraw
 
 from page_config import *
-from utils import get_filename_dict, img2pdf
+from utils import convert_hue, get_filename_dict, img2pdf
 
-def get_char_img_dict(in_path):
+
+def get_char_img_dict(in_path, hue=None, sat=None):
     '''
     Returns a dictionary of Image objects for each character.
 
@@ -16,9 +17,11 @@ def get_char_img_dict(in_path):
     img_dict = {}
     for char in filenames.keys():
         img_dict[char] = Image.open(os.path.join(in_path, 'roi', filenames[char]))
+        if hue is not None or sat is not None:
+            img_dict[char] = convert_hue(img_dict[char], hue, sat)
     return img_dict
 
-def generate_layout(text, in_path, out_dir, text_hue=None):
+def generate_layout(text, in_path, out_dir, hue=None, sat=None):
     im = Image.new('RGB', (PAGE_WIDTH, PAGE_HEIGHT), PAGE_COLOR)
     exp = ['f', 'p', 'j',]
     exp_lis = ['g',  'y', 'q']
@@ -26,7 +29,7 @@ def generate_layout(text, in_path, out_dir, text_hue=None):
     sp_lis_mid = ['=', ';', '>', '<', '-']
     sp_lis_down = [',']
 
-    img_dict = get_char_img_dict(in_path)
+    img_dict = get_char_img_dict(in_path, hue, sat)
     tot = 0
     ind_n = 0
     char_list = list(text)
