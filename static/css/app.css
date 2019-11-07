@@ -76,6 +76,10 @@
     color: rgba(255, 255, 255, 0.9);
 }
 
+.top-bar .site-title a:hover {
+    background-color: rgba(255, 255, 255, 0);
+}
+
 /* ******************************************************************
     HERO / LOGIN
 ****************************************************************** */
@@ -124,12 +128,12 @@
 }
 
 .main-body .img-container {
-    padding: 30px 80px;
+    padding: 3% 8%;
     background-color: #333;
 }
 
 .main-body img {
-    margin-bottom: 10px;
+    margin-bottom: 5px;
 }
 
 input[type="file"] {
@@ -199,6 +203,9 @@ footer hr {
     }
     .thinner-wrap {
         margin: 0 5%;
+    }
+    .wrap {
+        margin: 0 2%;
     }
     .center-big-button {
         width: 80%;

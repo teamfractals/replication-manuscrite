@@ -29,7 +29,7 @@
         <!-- DESKTOP NAV-->
         <nav class="top-bar nav-desktop">
           <div class="top-bar-left">
-              <h3 class="site-title">Replication Manuscrite</h3>
+              <h3 class="site-title"><a href="/">Replication Manuscrite</a></h3>
           </div>
           <div class="top-bar-right">
             <ul class="menu">
@@ -43,7 +43,8 @@
       <!-- OUTPUT SECTION -->
       <div class="wrap main-body">
         <h1>Generated Document</h1>
-        <a class="button center-big-button success" href="{{url_for('static', filename='__generated__/generated.pdf')}}?dummy={{random}}">
+        <a target="_blank" class="button center-big-button success" 
+           href="{{url_for('static', filename='__generated__/generated.pdf')}}?dummy={{random}}">
           Download as PDF
         </a>
         <div class="img-container">

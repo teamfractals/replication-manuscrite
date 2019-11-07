@@ -25,11 +25,10 @@ def uploaded():
 @app.route("/generate", methods=['POST'])
 def generate():
     text = request.form['text_input']
-    print("TEXT RECEIVED:", text)
     npages = generate_layout(text, "out/filled_template", "static/__generated__")
     page_seq = [str(i) + ".png" for i in range(npages)]
     return render_template('output_display.html', page_seq=page_seq, random=randint(0, 100000))
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0')
+    app.run(debug=True, host='0.0.0.0')
 

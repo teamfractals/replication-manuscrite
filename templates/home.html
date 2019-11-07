@@ -29,7 +29,7 @@
         <!-- DESKTOP NAV-->
         <nav class="top-bar nav-desktop">
           <div class="top-bar-left">
-              <h3 class="site-title">Replication Manuscrite</h3>
+              <h3 class="site-title"><a href="/">Replication Manuscrite</a></h3>
           </div>
           <div class="top-bar-right">
             <ul class="menu">
@@ -43,15 +43,14 @@
         <!-- HERO -->
         <div class="hero">
           <div class="wrap grid-x grid-margin-x">
-            <div class="small-12 medium-7 cell">
+            <div class="small-12 medium-9 cell">
               <h1>Painless Handwriting</h1>
               <p>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor 
-                incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis 
-                nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. 
-                Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore 
-                eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt 
-                in culpa qui officia deserunt mollit anim id est laborum.
+                Tired of writing assignments by hand? We are here for the rescue!
+                With our product, you can now generate long documents in your handwriting, without
+                any of the tedium from before! You only need to provide a sample of your handwriting
+                as a scanned image, and the text you want to be written out. Within a few clicks, 
+                you will get a generated PDF document ready for printing!
               </p>
             </div>
           </div>
@@ -84,8 +83,8 @@
           </ul>
           <div class=button-group-container>
             <div class="button-group">
-              <a class="button" href='{{url_for("static", filename="template.pdf")}}'>Get Template</a>
-              <a class="button" href="/upload">Upload Template</a>
+              <a class="button" target="_blank" href='{{url_for("static", filename="template.pdf")}}'>Get Template</a>
+              <a class="button" href="/upload">Start!</a>
             </div>
           </div>
       </div>
