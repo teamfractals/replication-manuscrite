@@ -35,6 +35,22 @@ def generate_layout(text, in_path, out_dir, hue=None, sat=None):
     char_list = list(text)
     DEFAULT_IMG = img_dict['~']
 
+    count1, count2 = 0, 0
+    for i, char in enumerate(text):
+        if (char == '"' and count1 == 0):
+            char_list[i] = '“'
+            count1 = 1
+        elif (char == '"' and count1 == 1) :
+            char_list[i] = '”'
+            count1 = 0
+        elif (char == "'" and count2 == 0):
+            char_list[i] = '‘'
+            count2 = 1
+        elif (char == "'" and count2 == 1):
+            char_list[i] = '’'
+            count2 = 0
+
+
     for char in char_list:
           if char == '\n' or char == '\r':
               tot = MARGIN_LEFT
@@ -69,11 +85,15 @@ def generate_layout(text, in_path, out_dir, hue=None, sat=None):
     path_list = []
     page_cnt = 0
 
-    for char in char_list:    
+    for i, char in enumerate(char_list):    
         if char == "line_break":
             w_p = MARGIN_LEFT
             h_p += LING_SPACING
         elif char == '\r' or char == '\n':
+            if char == '\n':
+                # handle Windows line endings
+                if i-1 > 0 and char_list[i-1] == '\r':
+                    continue
             w_p = MARGIN_LEFT
             h_p += LING_SPACING    
         elif char == ' ':
@@ -102,14 +122,14 @@ def generate_layout(text, in_path, out_dir, hue=None, sat=None):
         if h_p >= PAGE_HEIGHT - MARGIN_BOTTOM:
             w_p = MARGIN_LEFT
             h_p = MARGIN_TOP   
-            save_path = os.path.join(out_dir, str(i) + ".png")
+            save_path = os.path.join(out_dir, str(page_cnt) + ".png")
             im.save(save_path)
             page_cnt += 1
             print('Saved page', page_cnt, '...')
             path_list.append(save_path)
             i += 1
             im = Image.new('RGB', (PAGE_WIDTH, PAGE_HEIGHT), PAGE_COLOR)
-    save_path = os.path.join(out_dir, str(i) + ".png")
+    save_path = os.path.join(out_dir, str(page_cnt) + ".png")
     im.save(save_path)     
     page_cnt += 1
     print('Saved page', page_cnt, '...')
