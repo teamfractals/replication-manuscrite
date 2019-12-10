@@ -21,6 +21,10 @@ def extract_boxes(img_path):
 
     # Read the image
     img = cv2.imread(img_path)
+
+    # Smoothing the image to remove some noise
+    img = cv2.GaussianBlur(img, (3, 3), 0)
+
     # grayscaling:
     gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
 
